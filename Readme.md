@@ -2,7 +2,7 @@
 
 Sample project to book a taxi in a web site.
 You will be able to select your origin, destiny and special requirements.
-It's just a demo to see the interaction between the front end, back end and db model.
+It's just a demo to see the interaction between the front end, back end and db model for a taxi service.
 
 ## Features
 - Flexible Table
