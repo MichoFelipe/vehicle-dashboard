@@ -1,0 +1,54 @@
+<h1 mat-dialog-title>
+  <input
+    matInput
+    placeholder="{{ data.name }}"
+    [(ngModel)]="newData.name"
+    type="text"
+    name="name"
+    readonly
+  />
+</h1>
+<div>
+  <mat-list>
+    <h3 mat-subheader>Driver Information</h3>
+    <mat-list-item>
+      <mat-icon mat-list-icon>phone</mat-icon>
+      <input
+        matInput
+        placeholder="{{ data.phoneNumber }}"
+        [(ngModel)]="newData.phoneNumber"
+        type="text"
+        name="phone"
+      />
+    </mat-list-item>
+    <mat-list-item>
+      <mat-icon mat-list-icon>drive_eta</mat-icon>
+      <input
+        matInput
+        placeholder="{{ data.carModel }}"
+        [(ngModel)]="newData.carModel"
+        type="text"
+        name="carModel"
+      />
+    </mat-list-item>
+  </mat-list>
+  <div class="button-row">
+    <button
+      class="dialog-button"
+      mat-raised-button
+      color="primary"
+      [mat-dialog-close]="newData"
+      tabindex="1"
+    >
+      Book
+    </button>
+    <button
+      class="dialog-button"
+      mat-raised-button
+      mat-dialog-close
+      tabindex="3"
+    >
+      Close
+    </button>
+  </div>
+</div>

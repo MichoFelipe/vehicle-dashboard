@@ -1,0 +1,26 @@
+<section>
+  <div class="page-navbar">
+    <span
+      ><h2 class="project-name-2">
+        <a routerLink="/home">Chazki Taxi</a>
+      </h2></span
+    >
+    <span class="spacer"></span>
+    <span class="menu-navbar-small">
+      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Menu">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+      <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/">
+          <mat-icon>hotel</mat-icon>
+          <span>Logout</span>
+        </button>
+      </mat-menu>
+    </span>
+    <span class="menu-navbar-large">
+      <p><a routerLink="/">Logout</a></p>
+    </span>
+  </div>
+
+  <div class="bottom-border"></div>
+</section>

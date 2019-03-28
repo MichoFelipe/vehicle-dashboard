@@ -1,0 +1,138 @@
+<navbar-component></navbar-component>
+<header-component></header-component>
+
+<section class="home-container">
+  <div class="main-content">
+    <div style="display: flex;">
+      <form class="form-filter">
+        <fieldset> 
+          <legend>Origin:</legend>
+          <mat-form-field class="filter-form-field" matTooltip="Seleccione distrito" [matTooltipPosition]="'above'" matTooltipShowDelay="1000">
+            <mat-select [(value)]="filterOrigin" (change)="changeFilter($event.value)">
+              <mat-option *ngFor="let f of filterValueList" [value]="f.value" >
+                {{ f.name }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <span class="filter-form-field">
+          </span>
+
+          <mat-form-field class="filter-form-field" matTooltip="Ingrese dirección origen"  [matTooltipPosition]="'above'" matTooltipShowDelay="1000">
+            <input matInput placeholder="Dirección" [(ngModel)]="searchFilter" type="text" name="searchOrigen">
+            <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </fieldset>
+      </form>
+
+      <form class="form-filter">
+        <fieldset> 
+            <legend>Destiny:</legend>
+            <mat-form-field class="filter-form-field" matTooltip="Seleccione distrito" [matTooltipPosition]="'above'" matTooltipShowDelay="1000">
+              <mat-select  >
+                <mat-option *ngFor="let f of filterValueList" [value]="f.value" >
+                  {{ f.name }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+    
+            <span class="filter-form-field">
+            </span>
+    
+            <mat-form-field class="filter-form-field" matTooltip="Ingrese dirección destino" [matTooltipPosition]="'above'" matTooltipShowDelay="1000">
+              <input matInput placeholder="Dirección"  type="text" name="searchDestino">
+              <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+        </fieldset>
+      </form>
+
+      <form class="form-filter">
+          <fieldset> 
+              <legend>Special requirement:</legend>
+              <mat-form-field class="filter-form-field" matTooltip="Seleccione requerimiento" [matTooltipPosition]="'above'" matTooltipShowDelay="1000">
+                <mat-select [(value)]="filterSpecialRequirement" (change)="changeSpecialRequirements($event.value)">
+                  <mat-option *ngFor="let f of filterSpecialRequirements" [value]="f.value" >
+                    {{ f.name }}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+      
+              <span class="filter-form-field">
+              </span>
+      
+              <mat-form-field class="filter-form-field" matTooltip="Ingrese requerimiento" [matTooltipPosition]="'above'" matTooltipShowDelay="1000">
+                <input matInput placeholder="Detalle requerimiento"   type="text" name="searchRequerimientos">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="clearFilter()">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+          </fieldset>
+      </form>
+    </div>
+    <br>
+
+    <div class="example-container mat-elevation-z8">
+      <div class="table-header">
+        <span>
+          <h2 class="project-name-2">Available taxis</h2>
+        </span>
+
+        <span class="spacer"></span>
+
+      </div>
+
+      <div *ngIf="isLoadingResults">
+        <mat-progress-bar mode="indeterminate" *ngIf="isLoadingResults"></mat-progress-bar>
+      </div>
+
+      <mat-table #table [dataSource]="dataSource" class="example-table" matSort matSortActive="id" matSortDirection="asc">
+
+        <!-- Id Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef mat-sort-header class="id-column">#</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="id-column">{{ row.id }}</mat-cell>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Name</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.name }}</mat-cell>
+        </ng-container>
+
+        <!-- Phone Number Column -->
+        <ng-container matColumnDef="phoneNumber">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Phone Number</mat-header-cell>
+          <mat-cell *matCellDef="let row" class="phone-column">{{ row.phoneNumber }}</mat-cell>
+        </ng-container>
+
+        <!-- Car Model Column -->
+        <ng-container matColumnDef="carModel">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>Car Model</mat-header-cell>
+          <mat-cell *matCellDef="let row">{{ row.carModel }}</mat-cell>
+        </ng-container>
+
+        <!-- Current Location Column -->
+        <ng-container matColumnDef="currentLocation">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Current Location</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.currentLocation }}</mat-cell>
+        </ng-container>
+
+        <!-- Special Requirement Column -->
+        <ng-container matColumnDef="specialRequirement">
+            <mat-header-cell *matHeaderCellDef mat-sort-header>Special Requirement</mat-header-cell>
+            <mat-cell *matCellDef="let row">{{ row.specialRequirement }}</mat-cell>
+        </ng-container> 
+
+        <mat-header-row *matHeaderRowDef="columns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: columns; let i = index" (click)="editVehicleDialog(row, i)"></mat-row>
+      </mat-table>
+
+      <mat-paginator #paginator [length]="resultsLength" [pageSize]="20">
+      </mat-paginator>
+    </div>
+  </div>
+</section>
